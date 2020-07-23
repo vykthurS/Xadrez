@@ -1,7 +1,6 @@
 package xadrez;
 
 
-import tabuleiro.Posicao;
 import tabuleiro.Tabul;
 import xadrez.pecas.King;
 import xadrez.pecas.Rook;
@@ -22,10 +21,13 @@ public class Partida_Xadrez {
 		return mat;
 		
 	}
+	private void posicaoNovaPeca(char coluna, int linha, Peca_Xadrez peca) {
+		tabu.posicionamentoPeca(peca, new XadrezPos(coluna,linha).toPosicao());
+	}
 	private void configIni() {
-		tabu.posicionamentoPeca(new Rook(tabu,Color.WHITE),new Posicao(2,1));
-		tabu.posicionamentoPeca(new King(tabu,Color.BLACK),new Posicao(0,4));
-		tabu.posicionamentoPeca(new King(tabu,Color.WHITE),new Posicao(7,4));
+		posicaoNovaPeca('b',6, new Rook(tabu,Color.WHITE));
+		posicaoNovaPeca('e',8, new King(tabu,Color.BLACK));
+		posicaoNovaPeca('e',1,new King(tabu,Color.WHITE));
 	}
 
 }
