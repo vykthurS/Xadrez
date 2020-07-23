@@ -41,6 +41,17 @@ public class Tabul {
 		peca.posicao=posicao;
 		
 	}
+	public Peca ramovePeca(Posicao posicao) {
+		if(!existenciaPosicao(posicao)) {
+			throw new TabulException("Não existe esta posição");
+		}
+		if (peca(posicao)==null) {
+			return null;
+		}
+		Peca aux=peca(posicao);
+		pecas[posicao.getLinha()][posicao.getColuna()]=null;
+		return aux;
+	}
 	private boolean existenciaPosicao(int linha, int coluna) {
 		return linha>=0 && linha< linhas && coluna>=0 && coluna<colunas;
 	}
