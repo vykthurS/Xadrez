@@ -29,6 +29,8 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
+
+	
 	public static XadrezPos LerEntradaPos(Scanner sc) {
 		try {
 			String s=sc.nextLine();
@@ -37,7 +39,7 @@ public class UI {
 			return new XadrezPos(coluna,linha);
 		}
 		catch(RuntimeException e) {
-			throw new InputMismatchException("\"Erro ao instanciar a posição de xadrez, valores possiveis são de a1 até h8 \"");
+			throw new InputMismatchException("Erro ao instanciar a posição de xadrez, valores possiveis são de a1 até h8");
 			}
 		}
 	public static void printTabu(Peca_Xadrez[][] pecas) {
@@ -57,11 +59,11 @@ public class UI {
 		else {
 			if (pecas.getColor()== Color.WHITE) {
 	                System.out.print(ANSI_WHITE + pecas + ANSI_RESET);
-	                }
+	        }
 			else {
 	                System.out.print(ANSI_YELLOW + pecas + ANSI_RESET);
-	            }
 	        }
+	    }
 		System.out.print(" ");
 		}
 }
