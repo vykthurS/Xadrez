@@ -13,5 +13,10 @@ public class Rook extends Peca_Xadrez {
 	public String toString() {
 		return "R";
 	}
+	@Override
+	public boolean[][] movimentosPoss() {
+		boolean[][] mat=new boolean[getTabu().getLinhas()][getTabu().getColunas()];
+		return mat;
+	}
 
 }

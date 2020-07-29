@@ -41,6 +41,9 @@ public class Partida_Xadrez {
 		if (!tabu.existePeca(posicao)) {
 			throw new XadrezException ("Não existe peça na posição de origem");
 		}
+		if(!tabu.peca(posicao).haMoviPoss()) {
+			throw new XadrezException("Não há movimentos possiveis para essa peça");
+		}
 	}
 	
 

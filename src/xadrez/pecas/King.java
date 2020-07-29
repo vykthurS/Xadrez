@@ -13,6 +13,11 @@ public class King extends Peca_Xadrez {
 	public String toString() {
 		return"K";
 	}
+	@Override
+	public boolean[][] movimentosPoss() {
+		boolean[][] mat=new boolean[getTabu().getLinhas()][getTabu().getColunas()];
+		return mat;
+	}
 	
 
 }
