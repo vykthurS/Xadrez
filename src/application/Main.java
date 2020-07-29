@@ -16,6 +16,7 @@ public class Main {
 		
 		while (true) {
 			try {
+				UI.cls();
 				UI.printTabu(partida.getPecas());
 				System.out.println();
 				System.out.print("Origem: ");
