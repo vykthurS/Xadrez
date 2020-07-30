@@ -22,6 +22,10 @@ public class Main {
 				System.out.print("Origem: ");
 				XadrezPos origem=UI.LerEntradaPos(sc);
 				
+				boolean[][] moviposs = partida.moviposs(origem);
+				UI.cls();
+				UI.printTabu(partida.getPecas(),moviposs);
+				
 				System.out.println();
 				System.out.print("Destino: ");
 				XadrezPos dest=UI.LerEntradaPos(sc);

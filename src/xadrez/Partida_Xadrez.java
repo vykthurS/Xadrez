@@ -24,6 +24,11 @@ public class Partida_Xadrez {
 		return mat;
 
 	}
+	public boolean[][] moviposs(XadrezPos origemPosicao){
+		Posicao posicao=origemPosicao.toPosicao();
+		validaOrigemPos(posicao);
+		return tabu.peca(posicao).movimentosPoss();
+	} 
 	public Peca_Xadrez performMovXad(XadrezPos posicaoOrigem, XadrezPos destPosicao) {
 		Posicao origem= posicaoOrigem.toPosicao();
 		Posicao dest= destPosicao.toPosicao();
