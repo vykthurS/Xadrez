@@ -41,7 +41,7 @@ public class Tabul {
 		peca.posicao=posicao;
 		
 	}
-	public Peca ramovePeca(Posicao posicao) {
+	public Peca removePeca(Posicao posicao) {
 		if(!existenciaPosicao(posicao)) {
 			throw new TabulException("Não existe esta posição");
 		}

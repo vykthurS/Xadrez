@@ -1,8 +1,11 @@
 package application;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import xadrez.Color;
 import xadrez.Partida_Xadrez;
 import xadrez.Peca_Xadrez;
@@ -49,9 +52,10 @@ public class UI {
 					"Erro ao instanciar a posição de xadrez, valores possiveis são de a1 até h8");
 		}
 	}
-	public static void printPartida(Partida_Xadrez partidaXadrez) {
+	public static void printPartida(Partida_Xadrez partidaXadrez, List<Peca_Xadrez> capturadas) {
 		printTabu(partidaXadrez.getPecas());
 		System.out.println();
+		printCaptP(capturadas);
 		System.out.println("Turno: "+ partidaXadrez.getTurn());
 		System.out.println("Esperando jogador: "+partidaXadrez.getPlayerTurn());
 	}
@@ -91,5 +95,19 @@ public class UI {
 			}
 		}
 		System.out.print(" ");
+	}
+	private static void printCaptP(List<Peca_Xadrez>capturadas) {
+		List<Peca_Xadrez>white=capturadas.stream().filter(x->x.getColor()==Color.WHITE).collect(Collectors.toList());
+		List<Peca_Xadrez>black=capturadas.stream().filter(x->x.getColor()==Color.BLACK).collect(Collectors.toList());
+		System.out.println("Peças capturadas: ");
+		System.out.print("Brancas: ");
+		System.out.print(ANSI_WHITE);
+		System.out.println(Arrays.deepToString(white.toArray()));
+		System.out.print(ANSI_RESET);
+		System.out.println("Peças capturadas: ");
+		System.out.print("Pretas: ");
+		System.out.print(ANSI_YELLOW);
+		System.out.println(Arrays.deepToString(black.toArray()));
+		System.out.print(ANSI_RESET);
 	}
 }
