@@ -17,7 +17,7 @@ public class Main {
 		while (true) {
 			try {
 				UI.cls();
-				UI.printTabu(partida.getPecas());
+				UI.printPartida(partida);
 				System.out.println();
 				System.out.print("Origem: ");
 				XadrezPos origem=UI.LerEntradaPos(sc);

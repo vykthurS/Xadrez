@@ -7,12 +7,25 @@ import xadrez.pecas.King;
 import xadrez.pecas.Rook;
 
 public class Partida_Xadrez {
+	
+	private int turn;
+	private Color playerTurn;
+	
 	private Tabul tabu;
 
 	public Partida_Xadrez() {
 		tabu = new Tabul(8, 8);
+		turn=1;
+		playerTurn=Color.WHITE;
 		configIni();
 	}
+	public int getTurn() {
+		return turn;
+	}
+	public Color getPlayerTurn() {
+		return playerTurn;
+	}
+	
 
 	public Peca_Xadrez[][] getPecas() {
 		Peca_Xadrez[][] mat = new Peca_Xadrez[tabu.getLinhas()][tabu.getColunas()];
@@ -35,6 +48,7 @@ public class Partida_Xadrez {
 		validaOrigemPos(origem);
 		validaDestPos(origem,dest);
 		Peca pecaCapt=fazMov(origem,dest);
+		nextTurn();
 		return (Peca_Xadrez)pecaCapt;
 	}
 	private Peca fazMov(Posicao origem,Posicao dest) {
@@ -47,6 +61,9 @@ public class Partida_Xadrez {
 		if (!tabu.existePeca(posicao)) {
 			throw new XadrezException ("Não existe peça na posição de origem");
 		}
+		if(playerTurn !=((Peca_Xadrez)tabu.peca(posicao)).getColor()) {
+			throw new XadrezException("A peça escolhida não é sua");
+		}
 		if(!tabu.peca(posicao).haMoviPoss()) {
 			throw new XadrezException("Não há movimentos possiveis para essa peça");
 		}
@@ -58,6 +75,11 @@ public class Partida_Xadrez {
 		}
 	}
 	
+	
+	private void nextTurn() {
+		turn++;
+		playerTurn=(playerTurn == Color.WHITE)? Color.BLACK : Color.WHITE;
+	}
 
 	private void posicaoNovaPeca(char coluna, int linha, Peca_Xadrez peca) {
 		tabu.posicionamentoPeca(peca, new XadrezPos(coluna, linha).toPosicao());
