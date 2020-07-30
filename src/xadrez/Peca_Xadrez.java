@@ -1,6 +1,7 @@
 package xadrez;
 
 import tabuleiro.Peca;
+import tabuleiro.Posicao;
 import tabuleiro.Tabul;
 
 public abstract class Peca_Xadrez extends Peca {
@@ -15,6 +16,10 @@ public abstract class Peca_Xadrez extends Peca {
 		return color;
 	}
 	
+	protected boolean hapecaoponente(Posicao posicao) {
+		Peca_Xadrez p=(Peca_Xadrez)getTabu().peca(posicao);
+		return p!=null && p.getColor()!=color;
+	}
 	
 
 }
