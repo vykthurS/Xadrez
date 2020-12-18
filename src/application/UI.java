@@ -58,6 +58,9 @@ public class UI {
 		printCaptP(capturadas);
 		System.out.println("Turno: "+ partidaXadrez.getTurn());
 		System.out.println("Esperando jogador: "+partidaXadrez.getPlayerTurn());
+		if (partidaXadrez.getCheck()) {
+			System.out.println("CHECK!!!");
+		}
 	}
 
 	public static void printTabu(Peca_Xadrez[][] pecas) {

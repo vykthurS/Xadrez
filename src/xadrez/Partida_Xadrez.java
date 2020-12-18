@@ -2,6 +2,7 @@ package xadrez;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
@@ -15,6 +16,7 @@ public class Partida_Xadrez {
 	private Color playerTurn;
 	
 	private Tabul tabu;
+	private boolean check;
 	private List<Peca>pecaNoTab=new ArrayList<>();
 	private List<Peca>pecaCapt=new ArrayList<>();
 
@@ -29,6 +31,9 @@ public class Partida_Xadrez {
 	}
 	public Color getPlayerTurn() {
 		return playerTurn;
+	}
+	public boolean getCheck() {
+		return check;
 	}
 	
 
@@ -53,6 +58,12 @@ public class Partida_Xadrez {
 		validaOrigemPos(origem);
 		validaDestPos(origem,dest);
 		Peca pecaCapt=fazMov(origem,dest);
+		if (testeCheck(playerTurn)) {
+			DesfazMov(origem,dest,pecaCapt);
+			throw new XadrezException("Você não pode se colocar em Check");
+			
+		}
+		check=(testeCheck(oponente(playerTurn)))? true:false;
 		nextTurn();
 		return (Peca_Xadrez)pecaCapt;
 	}
@@ -67,6 +78,18 @@ public class Partida_Xadrez {
 		}
 		return pecaCapt;
 	}
+	
+	private void DesfazMov(Posicao origem, Posicao dest, Peca pecaCapt) {
+		Peca p=tabu.removePeca(dest);
+		tabu.posicionamentoPeca(p, origem);
+		
+		if (pecaCapt != null) {
+			tabu.posicionamentoPeca(pecaCapt, dest);
+			this.pecaCapt.remove(pecaCapt);
+			pecaNoTab.add(pecaCapt);
+		}
+	}
+	
 	private void validaOrigemPos(Posicao posicao) {
 		if (!tabu.existePeca(posicao)) {
 			throw new XadrezException ("Não existe peça na posição de origem");
@@ -89,6 +112,32 @@ public class Partida_Xadrez {
 	private void nextTurn() {
 		turn++;
 		playerTurn=(playerTurn == Color.WHITE)? Color.BLACK : Color.WHITE;
+	}
+	
+	private Color oponente (Color color) {
+		return(color==Color.WHITE)? Color.BLACK : Color.WHITE;
+	}
+	
+	private Peca_Xadrez king (Color color) {
+		List<Peca>list=pecaNoTab.stream().filter(x->((Peca_Xadrez)x).getColor()==color).collect(Collectors.toList());
+		for (Peca p:list) {
+			if (p instanceof King) {
+				return (Peca_Xadrez)p;
+			}
+		}
+		throw new IllegalStateException("Não existe rei da cor " + color + " no tabuleiro");
+	}
+	
+	private boolean testeCheck(Color color) {
+		Posicao kingPosicao=king(color).getPosXadrez().toPosicao();
+		List<Peca> oponentePecas=pecaNoTab.stream().filter(x->((Peca_Xadrez)x).getColor()==oponente(color)).collect(Collectors.toList());
+		for (Peca p: oponentePecas) {
+			boolean[][] mat = p.movimentosPoss();
+			if(mat[kingPosicao.getLinha()][kingPosicao.getColuna()]) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void posicaoNovaPeca(char coluna, int linha, Peca_Xadrez peca) {

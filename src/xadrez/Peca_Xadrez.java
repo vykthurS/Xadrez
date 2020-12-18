@@ -16,6 +16,10 @@ public abstract class Peca_Xadrez extends Peca {
 		return color;
 	}
 	
+	public XadrezPos getPosXadrez() {
+		return XadrezPos.PosicaoOrigem(posicao);
+	}
+	
 	protected boolean hapecaoponente(Posicao posicao) {
 		Peca_Xadrez p=(Peca_Xadrez)getTabu().peca(posicao);
 		return p!=null && p.getColor()!=color;
