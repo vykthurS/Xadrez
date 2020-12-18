@@ -17,6 +17,7 @@ public class Partida_Xadrez {
 	
 	private Tabul tabu;
 	private boolean check;
+	private boolean checkMate;
 	private List<Peca>pecaNoTab=new ArrayList<>();
 	private List<Peca>pecaCapt=new ArrayList<>();
 
@@ -34,6 +35,9 @@ public class Partida_Xadrez {
 	}
 	public boolean getCheck() {
 		return check;
+	}
+	public boolean getCheckMate() {
+		return checkMate;
 	}
 	
 
@@ -64,7 +68,13 @@ public class Partida_Xadrez {
 			
 		}
 		check=(testeCheck(oponente(playerTurn)))? true:false;
-		nextTurn();
+		
+		if (testeCheckMate(oponente(playerTurn))) {
+			checkMate=true;
+		}
+		else {
+			nextTurn();
+		}
 		return (Peca_Xadrez)pecaCapt;
 	}
 	private Peca fazMov(Posicao origem,Posicao dest) {
@@ -139,6 +149,30 @@ public class Partida_Xadrez {
 		}
 		return false;
 	}
+	private boolean testeCheckMate(Color color) {
+		if(!testeCheck(color)){
+			return false;
+		}
+		List <Peca> list = pecaNoTab.stream().filter(x->((Peca_Xadrez)x).getColor()==color).collect(Collectors.toList());
+		for(Peca p:list) {
+			boolean[][] mat=p.movimentosPoss();
+			for (int i=0; i<tabu.getLinhas();i++) {
+				for(int j=0;j<tabu.getColunas();j++) {
+					if(mat[i][j]) {
+						Posicao origem=((Peca_Xadrez)p).getPosXadrez().toPosicao();
+						Posicao dest=new Posicao(i,j);
+						Peca pecaCapt = fazMov(origem,dest);
+						boolean testeCheck=testeCheck(color);
+						DesfazMov(origem,dest,pecaCapt);
+						if(!testeCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
 
 	private void posicaoNovaPeca(char coluna, int linha, Peca_Xadrez peca) {
 		tabu.posicionamentoPeca(peca, new XadrezPos(coluna, linha).toPosicao());
@@ -147,18 +181,11 @@ public class Partida_Xadrez {
 
 	private void configIni() {
 		posicaoNovaPeca('c', 1, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('c', 2, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('d', 2, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('e', 2, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('e', 1, new Rook(tabu, Color.WHITE));
+		posicaoNovaPeca('h', 7, new Rook(tabu, Color.WHITE));
 		posicaoNovaPeca('d', 1, new King(tabu, Color.WHITE));
 
-		posicaoNovaPeca('c', 7, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('c', 8, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('d', 7, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('e', 7, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('e', 8, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('d', 8, new King(tabu, Color.BLACK));
+		posicaoNovaPeca('b', 8, new Rook(tabu, Color.BLACK));
+		posicaoNovaPeca('a', 8, new King(tabu, Color.BLACK));
 	}
 
 }
