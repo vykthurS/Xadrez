@@ -78,7 +78,8 @@ public class Partida_Xadrez {
 		return (Peca_Xadrez)pecaCapt;
 	}
 	private Peca fazMov(Posicao origem,Posicao dest) {
-		Peca p=tabu.removePeca(origem);
+		Peca_Xadrez p=(Peca_Xadrez)tabu.removePeca(origem);
+		p.aumentaContMov();
 		Peca pecaCapt=tabu.removePeca(dest);
 		tabu.posicionamentoPeca(p, dest);
 		
@@ -90,7 +91,8 @@ public class Partida_Xadrez {
 	}
 	
 	private void DesfazMov(Posicao origem, Posicao dest, Peca pecaCapt) {
-		Peca p=tabu.removePeca(dest);
+		Peca_Xadrez p=(Peca_Xadrez)tabu.removePeca(dest);
+		p.decrementaContMov();
 		tabu.posicionamentoPeca(p, origem);
 		
 		if (pecaCapt != null) {

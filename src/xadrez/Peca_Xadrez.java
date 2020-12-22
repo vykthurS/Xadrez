@@ -6,6 +6,7 @@ import tabuleiro.Tabul;
 
 public abstract class Peca_Xadrez extends Peca {
 	private Color color;
+	private int contMov;
 
 	public Peca_Xadrez(Tabul tabu, Color color) {
 		super(tabu);
@@ -16,6 +17,16 @@ public abstract class Peca_Xadrez extends Peca {
 		return color;
 	}
 	
+	public int getContMov() {
+		return contMov;
+	}
+
+	public void aumentaContMov() {
+		contMov++;
+	}
+	public void decrementaContMov() {
+		contMov--;
+	}
 	public XadrezPos getPosXadrez() {
 		return XadrezPos.PosicaoOrigem(posicao);
 	}
