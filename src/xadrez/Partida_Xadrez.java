@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabul;
+import xadrez.pecas.Bispo;
 import xadrez.pecas.King;
+import xadrez.pecas.Peao;
 import xadrez.pecas.Rook;
 
 public class Partida_Xadrez {
@@ -182,12 +184,33 @@ public class Partida_Xadrez {
 	}
 
 	private void configIni() {
-		posicaoNovaPeca('c', 1, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('h', 7, new Rook(tabu, Color.WHITE));
-		posicaoNovaPeca('d', 1, new King(tabu, Color.WHITE));
-
-		posicaoNovaPeca('b', 8, new Rook(tabu, Color.BLACK));
-		posicaoNovaPeca('a', 8, new King(tabu, Color.BLACK));
+		posicaoNovaPeca('a', 1, new Rook(tabu, Color.WHITE));
+		posicaoNovaPeca('c', 1, new Bispo(tabu, Color.WHITE));
+		posicaoNovaPeca('e', 1, new King(tabu, Color.WHITE));
+		posicaoNovaPeca('f', 1, new Bispo(tabu, Color.WHITE));
+		posicaoNovaPeca('h', 1, new Rook(tabu, Color.WHITE));
+		posicaoNovaPeca('a', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('b', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('c', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('d', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('e', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('f', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('g', 2, new Peao(tabu, Color.WHITE));
+		posicaoNovaPeca('h', 2, new Peao(tabu, Color.WHITE));
+		
+		posicaoNovaPeca('a', 8, new Rook(tabu, Color.BLACK));
+		posicaoNovaPeca('c', 8, new Bispo(tabu, Color.BLACK));
+		posicaoNovaPeca('e', 8, new King(tabu, Color.BLACK));
+		posicaoNovaPeca('f', 8, new Bispo(tabu, Color.BLACK));
+		posicaoNovaPeca('h', 8, new Rook(tabu, Color.BLACK));
+		posicaoNovaPeca('a', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('b', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('c', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('d', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('e', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('f', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('g', 7, new Peao(tabu, Color.BLACK));
+		posicaoNovaPeca('h', 7, new Peao(tabu, Color.BLACK));
 	}
 
 }
