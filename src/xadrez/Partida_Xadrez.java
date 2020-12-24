@@ -8,6 +8,7 @@ import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabul;
 import xadrez.pecas.Bispo;
+import xadrez.pecas.Cavalo;
 import xadrez.pecas.King;
 import xadrez.pecas.Peao;
 import xadrez.pecas.Rook;
@@ -185,9 +186,11 @@ public class Partida_Xadrez {
 
 	private void configIni() {
 		posicaoNovaPeca('a', 1, new Rook(tabu, Color.WHITE));
+		posicaoNovaPeca('b', 1, new Cavalo(tabu, Color.WHITE));
 		posicaoNovaPeca('c', 1, new Bispo(tabu, Color.WHITE));
 		posicaoNovaPeca('e', 1, new King(tabu, Color.WHITE));
 		posicaoNovaPeca('f', 1, new Bispo(tabu, Color.WHITE));
+		posicaoNovaPeca('g', 1, new Cavalo(tabu, Color.WHITE));
 		posicaoNovaPeca('h', 1, new Rook(tabu, Color.WHITE));
 		posicaoNovaPeca('a', 2, new Peao(tabu, Color.WHITE));
 		posicaoNovaPeca('b', 2, new Peao(tabu, Color.WHITE));
@@ -199,9 +202,11 @@ public class Partida_Xadrez {
 		posicaoNovaPeca('h', 2, new Peao(tabu, Color.WHITE));
 		
 		posicaoNovaPeca('a', 8, new Rook(tabu, Color.BLACK));
+		posicaoNovaPeca('b', 8, new Cavalo(tabu, Color.BLACK));
 		posicaoNovaPeca('c', 8, new Bispo(tabu, Color.BLACK));
 		posicaoNovaPeca('e', 8, new King(tabu, Color.BLACK));
 		posicaoNovaPeca('f', 8, new Bispo(tabu, Color.BLACK));
+		posicaoNovaPeca('g', 8, new Cavalo(tabu, Color.BLACK));
 		posicaoNovaPeca('h', 8, new Rook(tabu, Color.BLACK));
 		posicaoNovaPeca('a', 7, new Peao(tabu, Color.BLACK));
 		posicaoNovaPeca('b', 7, new Peao(tabu, Color.BLACK));
